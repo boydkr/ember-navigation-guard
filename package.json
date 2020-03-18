@@ -1,13 +1,13 @@
 {
   "name": "ember-navigation-guard",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "An add-on to warn and prevent accidental navigation",
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": "https://github.com/boydkr/ember-navigation-guard",
   "license": "MIT",
-  "author": "",
+  "author": "boydkr",
   "directories": {
     "doc": "doc",
     "test": "tests"
