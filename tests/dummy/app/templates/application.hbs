@@ -1,3 +1,15 @@
-<h2 id="title">Welcome to Ember</h2>
+<DocsHeader />
 
-{{outlet}}
+<DocsDemo as |demo|>
+  <demo.example name="demo.hbs">
+    <Input @type="checkbox" name="isGuarding" @checked={{this.isGuarding}} />
+    Enable Guard
+    <NavigationGuard 
+      @shouldGuard={{this.isGuarding}} 
+      @message='Guarding against navigation.
+
+Do you want to proceed?'
+    />
+  </demo.example>
+</DocsDemo>
+
