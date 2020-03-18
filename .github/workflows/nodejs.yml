@@ -17,6 +17,12 @@ jobs:
     strategy:
       matrix:
         node-version: [10.x, 12.x]
+        try-scenario: [ember-lts-3.12,
+                       ember-lts-3.16,
+                       ember-release,
+                       ember-beta,
+                       ember-default-with-jquery,
+                       ember-classic]
 
     steps:
     - uses: actions/checkout@v2
@@ -26,6 +32,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build --if-present
-    - run: npm run test:all
+    - run: npm test
       env:
+        EMBER_TRY_SCENARIO: ${{ matrix.try-scenario }}
         CI: true
