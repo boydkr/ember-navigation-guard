@@ -36,7 +36,7 @@ module('Unit | Service | navigation-guard', function(hooks) {
     service.updateGuard(key, true);
     service.updateGuard(key2, true);
     assert.equal(service.getMessage(), 'guarding1', 'gets first message');
-    assert.equal(service.getMessage(false), 'guarding2', 'gets last message');
+    assert.equal(service.getMessage({last: true}), 'guarding2', 'gets last message');
     service.updateGuard(key, false);
     assert.equal(service.getMessage(), 'guarding2', 'gets first remaining message');
     service.updateGuard(key2, false);

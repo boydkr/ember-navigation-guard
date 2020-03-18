@@ -1,7 +1,7 @@
 {
   "name": "ember-navigation-guard",
   "version": "0.0.2",
-  "description": "An add-on to warn and prevent accidental navigation",
+  "description": "An add-on to prevent accidental data loss on navigation",
   "keywords": [
     "ember-addon"
   ],

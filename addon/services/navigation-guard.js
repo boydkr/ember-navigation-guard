@@ -69,12 +69,13 @@ export default class NavigationGuardService extends Service {
     return some(Object.values(this._registrations), 'guarding');
   }
 
-  getMessage(first = true) {
+  getMessage(options = {}) {
+    let last = options.last
     let guard;
-    if (first) {
-      guard = this.firstMessage;
-    } else {
+    if (last) {
       guard = this.lastMessage;
+    } else {
+      guard = this.firstMessage;
     }
 
     return guard && guard.message;
