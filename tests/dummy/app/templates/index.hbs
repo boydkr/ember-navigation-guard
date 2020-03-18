@@ -1,0 +1,18 @@
+<DocsHero />
+
+<DocsDemo as |demo|>
+  <demo.example name="demo.hbs" class="bg-white">
+    <Input @type="checkbox" name="isGuarding" @checked={{this.isGuarding}} />
+    Enable Guard
+    <br>
+    <NavigationGuard 
+      @shouldGuard={{this.isGuarding}} 
+      @message='Guarding against navigation.
+
+Do you want to proceed?'
+    />
+    <p>
+      Try checking Enable Guard and transitioning routes or clicking and external link
+    </p>
+  </demo.example>
+</DocsDemo>

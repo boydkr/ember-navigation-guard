@@ -2,8 +2,18 @@
 
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
+const isProd = EmberAddon.env() === 'production';
+
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
+    postcssOptions: {
+      compile: {
+        plugins: [
+          { module: require('postcss-import') },
+          require('tailwindcss')('tailwind.config.js'),
+        ]
+      }
+    }
     // Add options here
   });
 
