@@ -49,8 +49,6 @@ jobs:
       with:
         node-version: 10.x
     - run: npm ci
-    - run: npm install --no-package-lock
     - run: node_modules/.bin/ember try:one ${{ matrix.try-scenario }}
       env:
         CI: true
-        

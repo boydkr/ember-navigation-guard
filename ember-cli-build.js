@@ -2,8 +2,6 @@
 
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
-const isProd = EmberAddon.env() === 'production';
-
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
     postcssOptions: {
