@@ -17,6 +17,24 @@ jobs:
     strategy:
       matrix:
         node-version: [10.x, 12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run lint:hbs
+    - run: npm run lint:js
+    - run: npm test
+      env:
+        CI: true
+  ember-try:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
         try-scenario: [ember-lts-3.12,
                        ember-lts-3.16,
                        ember-release,
@@ -26,13 +44,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 10.x
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 10.x
     - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - run: npm install --no-package-lock
+    - run: node_modules/.bin/ember try:one ${{ matrix.try-scenario }}
       env:
-        EMBER_TRY_SCENARIO: ${{ matrix.try-scenario }}
         CI: true
+        
