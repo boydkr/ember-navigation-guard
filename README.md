@@ -9,7 +9,7 @@ Prevent accidental user data loss by conditionally guarding route transitions an
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.12 or above
+* Ember.js v3.13 or above
 * Ember CLI v2.13 or above
 * Node.js v10 or above
 
