@@ -1,7 +1,9 @@
+![Node.js CI](https://github.com/boydkr/ember-navigation-guard/workflows/Node.js%20CI/badge.svg)
+
 ember-navigation-guard
 ==============================================================================
 
-[Short description of the addon.]
+Prevent accidental user data loss by conditionally guarding route transitions and url navigation.
 
 
 Compatibility
@@ -23,7 +25,53 @@ ember install ember-navigation-guard
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+This addon consist of a service and a component
+
+The `NavigationGuard` compoent takes a boolean `@shouldGuard` and an optional string `@message`
+
+hbs
+```
+<NavigationGuard @shouldGuard={{true}} @message="This component is preventing navigation" />
+```
+
+By default, enabling @shouldGuard will set the `onbeforeunload` browser hook to prompt on URL changes or window/tab close.  This message is not configurable.
+
+To control route transitions within your Ember app, you will need to consume the service in your Router, or elsewhere in your app.
+
+The `navigation-guard` service has a `preventNav` property that will be true when navigation should be prevented.
+
+It also has a `getMessage()` method to retrieve the first message that triggered `preventNav`.  If you want the last message instead, you can use `getMessage({last: true})`.
+
+router.js
+```
+import EmberRouter from '@ember/routing/router';
+import { inject as service } from '@ember/service';
+
+export default class Router extends EmberRouter {
+  @service navigationGuard;
+
+  ...
+
+  willTransition(_oldRoute, _newRoute, transition) {
+    super.willTransition(...arguments);
+    if (
+      this.navigationGuard.preventNav &&
+      !window.confirm(
+        this.navigationGuard.getMessage()
+      )
+    ) {
+      transition.abort();
+    } else {
+      // Bubble the `willTransition` action so that
+      // parent routes can decide whether or not to abort.
+      return true;
+    }
+  }
+}
+...
+```
+
+Here is a [demo app](https://boydkr.github.io/ember-navigation-guard/)
 
 
 Contributing
