@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import emberWindow from 'ember-window-mock';
 import { tracked } from '@glimmer/tracking';
+import { TrackedMap } from 'tracked-maps-and-sets';
 import { some, find, findLast } from 'lodash/collection';
 
 class GuardReg {
@@ -14,7 +15,7 @@ class GuardReg {
 }
 
 export default class NavigationGuardService extends Service {
-  @tracked _registrations = {};
+  _registrations = new TrackedMap();
   nextKey = 0;
 
   init() {
@@ -34,39 +35,35 @@ export default class NavigationGuardService extends Service {
 
   willDestroy() {
     super.willDestroy(...arguments);
+    this._registrations.clear();
     emberWindow.onbeforeunload = null;
   }
 
   register(msg = '') {
     let key = this.nextKey++;
-    this._registrations[key] = new GuardReg(false, msg);
-    this._registrations = this._registrations;
+    this._registrations.set(key, new GuardReg(false, msg));
     return key;
   }
 
   unregister(key) {
-    delete this._registrations[key];
-    this._registrations = this._registrations;
+    this._registrations.delete(key);
   }
 
-  updateGuard(key, value, message) {
-    const guard = this._registrations[key];
+  updateGuard(key, value) {
+    if (!this._registrations.has(key)) {
+      return;
+    }
 
-    if (!guard) return;
+    const guard = this._registrations.get(key);
 
     if (value !== guard.guarding) {
       guard.guarding = value;
+      //this._registrations.set(key, new GuardReg(value, guard.message));
     }
-
-    if (message !== undefined) {
-      guard.message = message;
-    }
-
-    this._registrations = this._registrations;
   }
 
   get preventNav() {
-    return some(Object.values(this._registrations), 'guarding');
+    return some(Array.from(this._registrations.values()), 'guarding');
   }
 
   getMessage(options = {}) {
@@ -82,10 +79,10 @@ export default class NavigationGuardService extends Service {
   }
 
   get firstMessage() {
-    return find(Object.values(this._registrations), 'guarding');
+    return find(Array.from(this._registrations.values()), 'guarding');
   }
 
   get lastMessage() {
-    return findLast(Object.values(this._registrations), 'guarding');
+    return findLast(Array.from(this._registrations.values()), 'guarding');
   }
 }
