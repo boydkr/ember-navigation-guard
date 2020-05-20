@@ -1,4 +1,4 @@
-![Node.js CI](https://github.com/boydkr/ember-navigation-guard/workflows/Node.js%20CI/badge.svg)
+![Node.js CI](https://github.com/boydkr/ember-navigation-guard/workflows/Node.js%20CI/badge.svg) [![Ember Observer Score](https://emberobserver.com/badges/ember-navigation-guard.svg)](https://emberobserver.com/addons/ember-navigation-guard)
 
 ember-navigation-guard
 ==============================================================================
