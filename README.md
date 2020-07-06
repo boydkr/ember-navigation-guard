@@ -27,16 +27,23 @@ ember install ember-navigation-guard
 Usage
 ------------------------------------------------------------------------------
 
-This addon consist of a service and a component
+This addon consists of 1 component and 1 service.
 
-The `NavigationGuard` compoent takes a boolean `@shouldGuard` and an optional string `@message`
+<details>
+<summary><code>NavigationGuard</code> component</summary>
+
+The `NavigationGuard` component takes a boolean `@shouldGuard` and an optional string `@message`.
 
 hbs
 ```
 <NavigationGuard @shouldGuard={{true}} @message="This component is preventing navigation" />
 ```
 
-By default, enabling @shouldGuard will set the `onbeforeunload` browser hook to prompt on URL changes or window/tab close.  This message is not configurable.
+By default, enabling `@shouldGuard` will set the `onbeforeunload` browser hook to prompt on URL changes or window/tab close.  This message is not configurable.
+</details>
+
+<details>
+<summary><code>navigation-guard</code> service</summary>
 
 To control route transitions within your Ember app, you will need to consume the service in your Router, or elsewhere in your app.
 
@@ -72,6 +79,7 @@ export default class Router extends EmberRouter {
 }
 ...
 ```
+</details>
 
 
 Contributing
