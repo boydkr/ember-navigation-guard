@@ -34,9 +34,12 @@ This addon consists of 1 component and 1 service.
 
 The `NavigationGuard` component takes a boolean `@shouldGuard` and an optional string `@message`.
 
-hbs
-```
-<NavigationGuard @shouldGuard={{true}} @message="This component is preventing navigation" />
+```handlebars
+{{!-- app/components/my-component.hbs --}}
+<NavigationGuard
+  @shouldGuard={{true}}
+  @message="This component is preventing navigation"
+/>
 ```
 
 By default, enabling `@shouldGuard` will set the `onbeforeunload` browser hook to prompt on URL changes or window/tab close.  This message is not configurable.
@@ -51,8 +54,8 @@ The `navigation-guard` service has a `preventNav` property that will be true whe
 
 It also has a `getMessage()` method to retrieve the first message that triggered `preventNav`.  If you want the last message instead, you can use `getMessage({last: true})`.
 
-router.js
-```
+```javascript
+// app/router.js
 import EmberRouter from '@ember/routing/router';
 import { inject as service } from '@ember/service';
 
