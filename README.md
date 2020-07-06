@@ -5,6 +5,8 @@ ember-navigation-guard
 
 Prevent accidental user data loss by conditionally guarding route transitions and url navigation.
 
+Here is a [demo app](https://boydkr.github.io/ember-navigation-guard/).
+
 
 Compatibility
 ------------------------------------------------------------------------------
@@ -70,8 +72,6 @@ export default class Router extends EmberRouter {
 }
 ...
 ```
-
-Here is a [demo app](https://boydkr.github.io/ember-navigation-guard/)
 
 
 Contributing
