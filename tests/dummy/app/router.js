@@ -1,4 +1,4 @@
-import config from './config/environment';
+import config from 'dummy/config/environment';
 import AddonDocsRouter, { docsRoute } from 'ember-cli-addon-docs/router';
 import { inject as service } from '@ember/service';
 
