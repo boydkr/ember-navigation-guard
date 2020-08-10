@@ -7,6 +7,7 @@ module.exports = function(deployTarget) {
     git: { repo: 'https://github.com/boydkr/ember-navigation-guard.git' },
     'git-ci': {
       enabled: true,
+      deployKey: process.env.DEPLOY_KEY
     }
     // include other plugin configuration that applies to all deploy targets here
   };
