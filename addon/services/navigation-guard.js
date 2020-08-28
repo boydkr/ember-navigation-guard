@@ -21,7 +21,7 @@ export default class NavigationGuardService extends Service {
   init() {
     super.init(...arguments);
     emberWindow.onbeforeunload = (e) => {
-      if (!this.preventNav) return null;
+      if (!this.preventNav) return undefined;
       e = e || window.event;
 
       //old browsers
