@@ -2,9 +2,11 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { setupWindowMock } from 'ember-window-mock/test-support';
 
 module('Integration | Component | navigation-guard', function(hooks) {
   setupRenderingTest(hooks);
+  setupWindowMock(hooks);
 
   test('it renders', async function(assert) {
     let service = this.owner.lookup('service:navigation-guard');
