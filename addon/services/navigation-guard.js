@@ -2,7 +2,7 @@ import Service from '@ember/service';
 import emberWindow from 'ember-window-mock';
 import { tracked } from '@glimmer/tracking';
 import { TrackedMap } from 'tracked-maps-and-sets';
-import { some, find, findLast } from 'lodash/collection';
+import { some, find, findLast } from 'lodash-es';
 
 class GuardReg {
   @tracked guarding = false;
