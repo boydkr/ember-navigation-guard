@@ -12,9 +12,7 @@ export default class Router extends AddonDocsRouter {
     super.willTransition(...arguments);
     if (
       this.navigationGuard.preventNav &&
-      !window.confirm(
-        this.navigationGuard.getMessage()
-      )
+      !window.confirm(this.navigationGuard.getMessage())
     ) {
       transition.abort();
     } else {
@@ -25,6 +23,6 @@ export default class Router extends AddonDocsRouter {
   }
 }
 
-Router.map(function() {
-  docsRoute(this, function() {});
+Router.map(function () {
+  docsRoute(this, function () {});
 });

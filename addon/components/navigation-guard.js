@@ -15,7 +15,11 @@ export default class NavigationGuardComponent extends Component {
 
   @action
   updateService() {
-    this.navigationGuard.updateGuard(this.regKey, this.args.shouldGuard, this.args.message);
+    this.navigationGuard.updateGuard(
+      this.regKey,
+      this.args.shouldGuard,
+      this.args.message
+    );
   }
 
   willDestroy() {

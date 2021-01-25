@@ -18,8 +18,8 @@ export default class NavigationGuardService extends Service {
   _registrations = new TrackedMap();
   nextKey = 0;
 
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
     emberWindow.onbeforeunload = (e) => {
       if (!this.preventNav) return undefined;
       e = e || window.event;
@@ -67,7 +67,7 @@ export default class NavigationGuardService extends Service {
   }
 
   getMessage(options = {}) {
-    let last = options.last
+    let last = options.last;
     let guard;
     if (last) {
       guard = this.lastMessage;
