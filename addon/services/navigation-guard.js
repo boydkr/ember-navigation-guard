@@ -67,7 +67,7 @@ export default class NavigationGuardService extends Service {
   }
 
   getMessage(options = {}) {
-    let last = options.last
+    let last = options.last;
     let guard;
     if (last) {
       guard = this.lastMessage;

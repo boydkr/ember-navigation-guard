@@ -2,6 +2,6 @@
 
 module.exports = {
   allowedVersions: {
-    'ember-cli-postcss': '*'
-  }
+    'ember-cli-postcss': '*',
+  },
 };
