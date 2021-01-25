@@ -28,3 +28,4 @@ export default class Router extends AddonDocsRouter {
 Router.map(function() {
   docsRoute(this, function() {});
 });
+
