@@ -61,7 +61,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
     - run: npm install
-    - run: npm run test:try-one ${{ matrix.try-scenario }}
-        continue-on-fail: ${{matrix.try-scenario == 'ember-canary'}}
+    - name: "ember-try"
+      continue-on-error: ${{ matrix.try-scenario == 'ember-canary' }}
+      run: npm run test:try-one ${{ matrix.try-scenario }}
       env:
         CI: true
