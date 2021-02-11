@@ -62,5 +62,6 @@ jobs:
           ${{ runner.os }}-node-
     - run: npm install
     - run: npm run test:try-one ${{ matrix.try-scenario }}
+        continue-on-fail: ${{matrix.try-scenario == 'ember-canary'}}
       env:
         CI: true
