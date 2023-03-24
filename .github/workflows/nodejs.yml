@@ -10,18 +10,26 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  lint:
+    name: 'Linting'
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v1
+      - run: npm install
+      - run: npm run lint
 
+  test_linux:
+    needs: lint
+    name: 'Tests: ubuntu (node@{{matrix.node-version }})'
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: ['16']
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: volta-cli/action@v1
+    - uses: volta-cli/action@v1
       with:
         node-version: ${{ matrix.node-version }}
     - uses: actions/cache@v1
@@ -30,35 +38,29 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm install
-    - run: npm run lint
+    - run: npm ci
     - run: npm run test:ember
       env:
         CI: true
   ember-try:
+    needs: [lint, test_linux]
     runs-on: ubuntu-latest
+    name: 'Ember compatibility tests ember-source@{{ matrix.ember-version }}'
 
     strategy:
       fail-fast: false
       matrix:
-        try-scenario: [ember-lts-3.20,
-                       ember-lts-3.24,
-                       ember-lts-3.28]
+        ember-version: [lts-3.24,
+                        lts-3.28]
 
     steps:
     - uses: actions/checkout@v2
     - uses: volta-cli/action@v1
       with:
-        node-version: 16.x
+        node-version: ${{ matrix-node-version }}
     - uses: actions/cache@v1
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
     - run: npm install
-    - name: "ember-try-one"
-      continue-on-error: ${{ matrix.try-scenario == 'ember-canary' }}
-      run: npm run test:try-one ${{ matrix.try-scenario }}
+    - run: npm run test:try-one ember-${{ matrix.ember-version }}
+      continue-on-error: ${{ matrix.ember-version == 'canary' }}
       env:
         CI: true
