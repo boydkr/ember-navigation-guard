@@ -11,10 +11,9 @@ Here is a [demo app](https://boydkr.github.io/ember-navigation-guard/).
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.16+ up through 4.0 
-* Ember CLI v2.13 or above
-* Node.js v14 or above
-
+* Ember.js v3.20 or above
+* Ember CLI v3.20 or above
+* Node.js v12 or above
 
 
 Installation
