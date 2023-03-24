@@ -41,6 +41,7 @@
     "@glimmer/tracking": "^1.0.4",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
+    "ember-auto-import": "^2.6.1",
     "ember-cli": "~3.28.0",
     "ember-cli-addon-docs": "^5.1.0",
     "ember-cli-addon-docs-esdoc": "^0.2.3",
@@ -80,7 +81,8 @@
     "prettier": "^2.3.2",
     "qunit": "^2.16.0",
     "qunit-dom": "^1.6.0",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^1.2.0",
+    "webpack": "~5.76.3"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
