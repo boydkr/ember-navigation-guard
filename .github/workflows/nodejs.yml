@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [14.x, 16.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -43,17 +43,15 @@ jobs:
       matrix:
         try-scenario: [ember-lts-3.16,
                        ember-lts-3.20,
-                       ember-release,
-                       ember-beta,
-                       ember-canary,
-                       ember-default-with-jquery,
+                       ember-lts-3.24,
+                       ember-lts-3.28,
                        ember-classic]
 
     steps:
     - uses: actions/checkout@v2
     - uses: volta-cli/action@v1
       with:
-        node-version: 10.x
+        node-version: 16.x
     - uses: actions/cache@v1
       with:
         path: ~/.npm
