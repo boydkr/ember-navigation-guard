@@ -2,7 +2,7 @@
 
 <DocsDemo as |demo|>
   <demo.example name="demo.hbs" class="bg-white">
-    <Input @type="checkbox" name="isGuarding" @checked={{this.isGuarding}} />
+    <Input aria-label="Check to enable guard" @type="checkbox" name="isGuarding" @checked={{this.isGuarding}} />
     Enable Guard
     <br>
     <NavigationGuard 

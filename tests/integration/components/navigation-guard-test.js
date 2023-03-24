@@ -11,7 +11,7 @@ module('Integration | Component | navigation-guard', function (hooks) {
 
     await render(hbs`<NavigationGuard @shouldGuard={{false}}/>`);
 
-    assert.equal(service.preventNav, false);
+    assert.false(service.preventNav);
   });
 
   test('it guards', async function (assert) {
@@ -21,7 +21,7 @@ module('Integration | Component | navigation-guard', function (hooks) {
       hbs`<NavigationGuard @shouldGuard={{true}} @message='guarding'/>`
     );
 
-    assert.equal(service.preventNav, true);
+    assert.true(service.preventNav);
     assert.equal(service.getMessage(), 'guarding');
   });
 
@@ -33,10 +33,10 @@ module('Integration | Component | navigation-guard', function (hooks) {
     await render(
       hbs`<NavigationGuard @shouldGuard={{this.guard}} @message='guarding'/>`
     );
-    assert.equal(service.preventNav, false);
+    assert.false(service.preventNav);
 
     this.set('guard', true);
-    assert.equal(service.preventNav, true);
+    assert.true(service.preventNav);
   });
 
   test('turn guarding off', async function (assert) {
@@ -47,9 +47,9 @@ module('Integration | Component | navigation-guard', function (hooks) {
     await render(
       hbs`<NavigationGuard @shouldGuard={{this.guard}} @message='guarding'/>`
     );
-    assert.equal(service.preventNav, true);
+    assert.true(service.preventNav);
 
     this.set('guard', false);
-    assert.equal(service.preventNav, false);
+    assert.false(service.preventNav);
   });
 });

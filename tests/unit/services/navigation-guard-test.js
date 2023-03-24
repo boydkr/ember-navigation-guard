@@ -12,14 +12,14 @@ module('Unit | Service | navigation-guard', function (hooks) {
 
   test('default not guarding', function (assert) {
     let service = this.owner.lookup('service:navigation-guard');
-    assert.equal(service.preventNav, false);
+    assert.false(service.preventNav);
   });
 
   test('simple guarding', function (assert) {
     let service = this.owner.lookup('service:navigation-guard');
     let key = service.register('I am guarding');
     service.updateGuard(key, true);
-    assert.equal(service.preventNav, true);
+    assert.true(service.preventNav);
   });
 
   test('simple guard message', function (assert) {
@@ -48,6 +48,6 @@ module('Unit | Service | navigation-guard', function (hooks) {
       'gets first remaining message'
     );
     service.updateGuard(key2, false);
-    assert.equal(service.preventNav, false, 'preventNav disabled');
+    assert.false(service.preventNav, 'preventNav disabled');
   });
 });
