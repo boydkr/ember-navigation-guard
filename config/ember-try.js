@@ -7,25 +7,14 @@ module.exports = async function () {
   return {
     scenarios: [
       {
-        name: 'lts-3.20',
-        npm: {
-          devDependencies: {
-            'ember-source': '~3.20.5',
-          },
-        },
-      },
-      {
         name: 'lts-3.24',
         npm: {
           devDependencies: {
-            'ember-source': '~3.24.3',
-          },
-        },
-      },
-      {
-        name: 'lts-3.24',
-        npm: {
-          devDependencies: {
+            '@types/ember-qunit': '^5.0.0',
+            '@types/ember-resolver': '^5.0.11',
+            '@types/ember__test-helpers': '^2.6.1',
+            'ember-qunit': '^5.1.5',
+            'ember-resolver': '^8.0.3',
             'ember-source': '~3.24.6',
           },
         },
@@ -73,6 +62,35 @@ module.exports = async function () {
           },
           overrides: {
             'ember-source': '$ember-source',
+          },
+        },
+      },
+      {
+        name: 'canary',
+        npm: {
+          devDependencies: {
+            'ember-source': await getChannelURL('beta'),
+          },
+          overrides: {
+            'ember-source': '$ember-source',
+          },
+        },
+      },
+      {
+        name: 'classic',
+        env: {
+          EMBER_OPTIONAL_FEATURES: JSON.stringify({
+            'application-template-wrapper': true,
+            'default-async-observers': false,
+            'template-only-glimmer-components': false,
+          }),
+        },
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.28.11',
+          },
+          ember: {
+            edition: 'classic,
           },
         },
       },
