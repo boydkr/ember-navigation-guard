@@ -53,8 +53,9 @@ jobs:
         ember-version: [lts-3.28,
                         lts-4.4,
                         lts-4.8,
+                        release,
                         embroider-safe,
-                        embroider-enabled]
+                        embroider-optimized]
 
     steps:
     - uses: actions/checkout@v2
