@@ -58,7 +58,6 @@ jobs:
     - uses: volta-cli/action@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - uses: actions/cache@v1
     - run: npm install
     - run: npm run test:try-one ember-${{ matrix.ember-version }}
       continue-on-error: ${{ matrix.ember-version == 'canary' }}
