@@ -1,5 +1,4 @@
-import Service from '@ember/service';
-//import emberWindow from 'ember-window-mock';
+import Service, { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { TrackedMap } from 'tracked-maps-and-sets';
 import { some, find, findLast } from 'lodash/collection';
@@ -18,11 +17,13 @@ export default class NavigationGuardService extends Service {
   _registrations = new TrackedMap();
   nextKey = 0;
 
+  @service('browser/window') window;
+
   constructor() {
     super(...arguments);
-    window.onbeforeunload = (e) => {
+    this.window.onbeforeunload = (e) => {
       if (!this.preventNav) return undefined;
-      e = e || window.event;
+      e = e || this.window.event;
 
       //old browsers
       if (e) {
@@ -36,7 +37,7 @@ export default class NavigationGuardService extends Service {
   willDestroy() {
     super.willDestroy(...arguments);
     this._registrations.clear();
-    window.onbeforeunload = null;
+    this.window.onbeforeunload = null;
   }
 
   register(msg = '') {
