@@ -90,7 +90,7 @@ module.exports = async function () {
             'ember-source': '~3.28.11',
           },
           ember: {
-            edition: 'classic,
+            edition: 'classic',
           },
         },
       },
