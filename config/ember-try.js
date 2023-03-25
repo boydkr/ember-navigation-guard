@@ -60,6 +60,20 @@ module.exports = async function () {
           devDependencies: {
             'ember-source': await getChannelURL('release'),
           },
+	  overrides: {
+	    'ember-source': '$ember-source',
+	  },
+        },
+      },
+      {
+        name: 'ember-beta',
+        npm: {
+          devDependencies: {
+            'ember-source': await getChannelURL('beta'),
+          },
+	  overrides: {
+	    'ember-source': '$ember-source',
+	  },
         },
       },
       embroiderSafe(),
