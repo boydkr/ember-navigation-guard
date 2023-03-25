@@ -39,7 +39,15 @@ module.exports = async function () {
         },
       },
       {
-        name: 'release',
+        name: 'ember-lts-4.4',
+        npm: {
+          devDependencies: {
+            'ember-source': '~4.4.4',
+          },
+        },
+      },
+      {
+        name: 'ember-release',
         npm: {
           devDependencies: {
             'ember-source': await getChannelURL('release'),

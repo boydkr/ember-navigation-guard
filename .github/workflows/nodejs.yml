@@ -21,11 +21,11 @@ jobs:
 
   test_linux:
     needs: lint
-    name: 'Tests: ubuntu (node@{{matrix.node-version }})'
+    name: 'Tests: ubuntu node@'
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: ['16']
+        node-version: ['16', '18']
 
     steps:
     - uses: actions/checkout@v2
@@ -45,13 +45,14 @@ jobs:
   ember-try:
     needs: [lint, test_linux]
     runs-on: ubuntu-latest
-    name: 'Ember compatibility tests ember-source@{{ matrix.ember-version }}'
+    name: 'Ember compatibility tests ember-source@'
 
     strategy:
       fail-fast: false
       matrix:
         ember-version: [lts-3.24,
-                        lts-3.28]
+                        lts-3.28,
+                        lts-4.4]
 
     steps:
     - uses: actions/checkout@v2
@@ -60,6 +61,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run test:try-one ember-${{ matrix.ember-version }}
-      continue-on-error: ${{ matrix.ember-version == 'canary' }}
+      continue-on-error: ${{ matrix.ember-version == 'lts-4.4' }}
       env:
         CI: true
