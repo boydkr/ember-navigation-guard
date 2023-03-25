@@ -22,7 +22,7 @@ module('Integration | Component | navigation-guard', function (hooks) {
     );
 
     assert.true(service.preventNav);
-    assert.equal(service.getMessage(), 'guarding');
+    assert.strictEqual(service.getMessage(), 'guarding');
   });
 
   test('turn guarding on', async function (assert) {
