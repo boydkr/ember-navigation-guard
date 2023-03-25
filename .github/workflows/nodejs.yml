@@ -21,11 +21,11 @@ jobs:
 
   test_linux:
     needs: lint
-    name: 'Tests: ubuntu (node@{{matrix.node-version }})'
+    name: 'Tests: ubuntu node@${{ matrix.node-version }}'
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: ['16']
+        node-version: [14, 16, 18]
 
     steps:
     - uses: actions/checkout@v2
@@ -45,21 +45,22 @@ jobs:
   ember-try:
     needs: [lint, test_linux]
     runs-on: ubuntu-latest
-    name: 'Ember compatibility tests ember-source@{{ matrix.ember-version }}'
+    name: 'Ember compatibility ember-source-${{ matrix.ember-version }}'
 
     strategy:
       fail-fast: false
       matrix:
-        ember-version: [lts-3.24,
-                        lts-3.28]
+        ember-version: [lts-3.28,
+                        lts-4.4,
+                        lts-4.8]
 
     steps:
     - uses: actions/checkout@v2
     - uses: volta-cli/action@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16
     - run: npm install
-    - run: npm run test:try-one ember-${{ matrix.ember-version }}
-      continue-on-error: ${{ matrix.ember-version == 'canary' }}
+    - run: npm run test:try-one ${{ matrix.ember-version }}
+      continue-on-error: ${{ matrix.ember-version == 'beta' }}
       env:
         CI: true

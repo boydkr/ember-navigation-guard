@@ -34,23 +34,26 @@ import { inject as service } from '@ember/service';
 
 export default class Router extends EmberRouter {
   @service navigationGuard;
+  @service router;
 
-  ...
+  constructor() {
 
-  willTransition(_oldRoute, _newRoute, transition) {
-    super.willTransition(...arguments);
-    if (
-      this.navigationGuard.preventNav &&
-      !window.confirm(
-        this.navigationGuard.getMessage()
-      )
-    ) {
-      transition.abort();
-    } else {
-      // Bubble the `willTransition` action so that
-      // parent routes can decide whether or not to abort.
-      return true;
+    ...
+
+    this.router.on('routeWillChange', async (transition) => {
+      if (
+        this.navigationGuard.preventNav &&
+        !window.confirm(this.navigationGuard.getMessage())
+      ) {
+        transition.abort();
+      } else {
+        // Bubble the `willTransition` action so that
+        // parent routes can decide whether or not to abort.
+        return true;
+      }
     }
+
+    ...
   }
 }
 ...
