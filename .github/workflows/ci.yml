@@ -1,0 +1,120 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request: {}
+
+concurrency:
+  group: ci-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: "Linting"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.x
+          cache: npm
+      - name: Install Dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+
+  test:
+    needs: lint
+    name: "Linux tests node@${{ matrix.node-version }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Tests
+        run: npm run test:ember
+
+  floating:
+    name: "Floating Dependencies"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.x
+          cache: npm
+      - name: Install Dependencies
+        run: npm install --no-shrinkwrap
+      - name: Run Tests
+        run: npm run test:ember
+
+  try-scenarios:
+    name: 'compatibility ember-source-${{ matrix.try-scenario }}'
+    runs-on: ubuntu-latest
+    needs: test
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        try-scenario:
+          - lts-3.28
+          - lts-4.4
+          - lts-4.8
+          - release
+          - classic
+          - embroider-safe
+          - embroider-optimized
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.x
+          cache: npm
+      - run: npm ci
+      - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }}
+
+  try-optional:
+    name: 'optional compat ember-${{ matrix.try-scenario }}'
+    runs-on: ubuntu-latest
+    needs: test
+    continue-on-error: true
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        try-scenario:
+          - beta
+          - canary
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.x
+          cache: npm
+      - run: npm ci
+      - run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }}

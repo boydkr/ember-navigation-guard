@@ -26,7 +26,7 @@ module('Unit | Service | navigation-guard', function (hooks) {
     let service = this.owner.lookup('service:navigation-guard');
     let key = service.register('I am guarding');
     service.updateGuard(key, true);
-    assert.equal(service.getMessage(), 'I am guarding');
+    assert.strictEqual(service.getMessage(), 'I am guarding');
   });
 
   test('multiple messages', function (assert) {
@@ -35,14 +35,14 @@ module('Unit | Service | navigation-guard', function (hooks) {
     let key2 = service.register('guarding2');
     service.updateGuard(key, true);
     service.updateGuard(key2, true);
-    assert.equal(service.getMessage(), 'guarding1', 'gets first message');
-    assert.equal(
+    assert.strictEqual(service.getMessage(), 'guarding1', 'gets first message');
+    assert.strictEqual(
       service.getMessage({ last: true }),
       'guarding2',
       'gets last message'
     );
     service.updateGuard(key, false);
-    assert.equal(
+    assert.strictEqual(
       service.getMessage(),
       'guarding2',
       'gets first remaining message'

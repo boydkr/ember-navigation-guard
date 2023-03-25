@@ -8,24 +8,21 @@ Prevent accidental user data loss by conditionally guarding route transitions an
 Here is a [demo app](https://boydkr.github.io/ember-navigation-guard/).
 
 
-Compatibility
-------------------------------------------------------------------------------
+## Compatibility
 
-* Ember.js v3.28 through v4.8
-* Ember CLI v3.20 or above
-* Node.js v12 or above
+* Ember.js v3.28 or above
+* Ember CLI v3.28 or above
+* Node.js v14 or above
 
 
-Installation
-------------------------------------------------------------------------------
+## Installation
 
 ```
 ember install ember-navigation-guard
 ```
 
 
-Usage
-------------------------------------------------------------------------------
+## Usage
 
 This addon consists of 1 component and 1 service.
 
@@ -61,23 +58,21 @@ import { inject as service } from '@ember/service';
 
 export default class Router extends EmberRouter {
   @service navigationGuard;
+  @service router;
 
   ...
 
-  willTransition(_oldRoute, _newRoute, transition) {
-    super.willTransition(...arguments);
-    if (
-      this.navigationGuard.preventNav &&
-      !window.confirm(
-        this.navigationGuard.getMessage()
-      )
-    ) {
-      transition.abort();
-    } else {
-      // Bubble the `willTransition` action so that
-      // parent routes can decide whether or not to abort.
-      return true;
-    }
+  constructor() {
+    super(...arguments);
+
+    this.router.on('routeWillChange', async (transition) => {
+      if (
+        this.navigationGuard.preventNav &&
+        !window.confirm(this.navigationGuard.getMessage())
+      ) {
+        transition.abort();
+      }
+    });
   }
 }
 ...
@@ -85,13 +80,11 @@ export default class Router extends EmberRouter {
 </details>
 
 
-Contributing
-------------------------------------------------------------------------------
+## Contributing
 
 See the [Contributing](CONTRIBUTING.md) guide for details.
 
 
-License
-------------------------------------------------------------------------------
+## License
 
 This project is licensed under the [MIT License](LICENSE.md).
