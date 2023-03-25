@@ -31,13 +31,13 @@ jobs:
 
   test:
     needs: lint
-    name: "Tests"
+    name: "Linux tests node@${{ matrix.node-version }}"
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     strategy:
       matrix:
-        node-version: [14, 16]
+        node-version: [14, 16, 18]
 
     steps:
       - uses: actions/checkout@v3
@@ -77,11 +77,13 @@ jobs:
       fail-fast: false
       matrix:
         try-scenario:
-          - lts-3.24
           - lts-3.28
           - lts-4.4
           - lts-4.8
+          - release
           - classic
+          - embroider-safe
+          - embroider-optimized
 
     steps:
       - uses: actions/checkout@v3
@@ -104,11 +106,8 @@ jobs:
       fail-fast: false
       matrix:
         try-scenario:
-          - release
           - beta
           - canary
-          - embroider-safe
-          - embroider-optimized
 
     steps:
       - uses: actions/checkout@v3

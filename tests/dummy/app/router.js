@@ -17,10 +17,6 @@ export default class Router extends AddonDocsRouter {
         !window.confirm(this.navigationGuard.getMessage())
       ) {
         transition.abort();
-      } else {
-        // Bubble the `willTransition` action so that
-        // parent routes can decide whether or not to abort.
-        return true;
       }
     });
   }
