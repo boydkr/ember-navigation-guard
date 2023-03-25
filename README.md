@@ -8,24 +8,21 @@ Prevent accidental user data loss by conditionally guarding route transitions an
 Here is a [demo app](https://boydkr.github.io/ember-navigation-guard/).
 
 
-Compatibility
-------------------------------------------------------------------------------
+## Compatibility
 
-* Ember.js v3.28 through v4.8
-* Ember CLI v3.20 or above
+* Ember.js v3.28 or above
+* Ember CLI v3.24 or above
 * Node.js v12 or above
 
 
-Installation
-------------------------------------------------------------------------------
+## Installation
 
 ```
 ember install ember-navigation-guard
 ```
 
 
-Usage
-------------------------------------------------------------------------------
+## Usage
 
 This addon consists of 1 component and 1 service.
 
@@ -85,13 +82,11 @@ export default class Router extends EmberRouter {
 </details>
 
 
-Contributing
-------------------------------------------------------------------------------
+## Contributing
 
 See the [Contributing](CONTRIBUTING.md) guide for details.
 
 
-License
-------------------------------------------------------------------------------
+## License
 
 This project is licensed under the [MIT License](LICENSE.md).
