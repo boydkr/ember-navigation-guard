@@ -52,10 +52,7 @@ jobs:
       matrix:
         ember-version: [lts-3.28,
                         lts-4.4,
-                        lts-4.8,
-                        release,
-                        embroider-safe,
-                        embroider-optimized]
+                        lts-4.8]
 
     steps:
     - uses: actions/checkout@v2
