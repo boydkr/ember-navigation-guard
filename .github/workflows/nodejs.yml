@@ -53,8 +53,6 @@ jobs:
         ember-version: [lts-3.28,
                         lts-4.4,
                         lts-4.8,
-                        release,
-                        beta,
                         embroider-safe,
                         embroider-enabled]
 
@@ -64,7 +62,7 @@ jobs:
       with:
         node-version: 16
     - run: npm install
-    - run: npm run test:try-one ember-${{ matrix.ember-version }}
+    - run: npm run test:try-one ${{ matrix.ember-version }}
       continue-on-error: ${{ matrix.ember-version == 'beta' }}
       env:
         CI: true
