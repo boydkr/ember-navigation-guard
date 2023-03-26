@@ -1,4 +1,4 @@
-[![Node.js CI](https://github.com/boydkr/ember-navigation-guard/workflows/Node.js%20CI/badge.svg)](https://github.com/boydkr/ember-navigation-guard/actions?query=branch%3Amaster) [![Ember Observer Score](https://emberobserver.com/badges/ember-navigation-guard.svg)](https://emberobserver.com/addons/ember-navigation-guard)
+[![Node.js CI](https://github.com/boydkr/ember-navigation-guard/workflows/Node.js%20CI/badge.svg)](https://github.com/boydkr/ember-navigation-guard/actions?query=branch%3Amaster) [![npm version](https://badge.fury.io/js/ember-navigation-guard.svg)](https://badge.fury.io/js/ember-navigation-guard) [![Ember Observer Score](https://emberobserver.com/badges/ember-navigation-guard.svg)](https://emberobserver.com/addons/ember-navigation-guard)
 
 ember-navigation-guard
 ==============================================================================
