@@ -42,7 +42,7 @@
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^2.6.1",
-    "ember-browser-services": "^1.1.4",
+    "ember-browser-services": "^4.0.4",
     "ember-cli": "~4.11.0",
     "ember-cli-addon-docs": "^5.1.0",
     "ember-cli-addon-docs-yuidoc": "^1.0.0",
